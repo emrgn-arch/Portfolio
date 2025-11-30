@@ -1,4 +1,36 @@
 
+window.addEventListener("pageshow", (e) => {
+    if (e.persisted) {
+        window.location.reload();
+    }
+});
+
+if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+
+    window.location.href = window.location.pathname + "?reload=" + Date.now();
+}
+
+
+
+
+
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+// Safari/Chrome mobile sometimes override scrollTo, so delay it
+window.scrollTo(0, 0);
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 50);
+});
+
+
+
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -9,21 +41,43 @@ canvas.height = 1080;
 
 const images = [];
 let imagesLoaded = 0;
+const loaderOverlay = document.getElementById("loading-overlay");
+const loaderProgress = document.getElementById("loader-progress");
 
 function getFrameFileName(index) {
     return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
-} 
+}
+
+
 
 function preloadImages() {
     for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
-        img.src = getFrameFileName(i);
+        //img.src = getFrameFileName(i);
+        img.src = getFrameFileName(i) + "?v=" + Date.now();
         images[i] = img;
 
         img.onload = () => {
             imagesLoaded++;
+
+            // Update % text (smooth)
+            const p = Math.round((imagesLoaded / frameCount) * 100);
+            loaderProgress.textContent = p + "%";
+
+            // Draw first frame immediately
             if (i === 1) {
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            }
+
+            // When ALL frames loaded
+            if (imagesLoaded === frameCount) {
+                // Fade out text slightly before overlay disappears
+                document.querySelector(".loader-text").style.opacity = "0";
+
+                setTimeout(() => {
+                    loaderOverlay.classList.add("hidden");
+                    startAutoScrollAfterDelay(); // auto scroll starts after delay
+                }, 700); // small delay adds elegance
             }
         };
     }
@@ -45,7 +99,6 @@ function getScrollFrame() {
 
 let currentFrameIndex = 1;
 
-// RENDER LOOP (draws frames)
 function render() {
     const targetFrame = getScrollFrame();
 
@@ -59,24 +112,18 @@ function render() {
 
 requestAnimationFrame(render);
 
-// AUTO-SCROLL + USER INTERRUPTION 
 
-let autoScroll = false;
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
-const AUTO_SCROLL_SPEED = maxScroll * 0.0005; 
+const AUTO_SCROLL_SPEED = maxScroll * 0.00054; 
 
 const INACTIVITY_DELAY = 4000;
 
-// Enable auto-scroll after delay
-setTimeout(() => {
-    autoScroll = true;
-}, INACTIVITY_DELAY);
+let autoScroll = false;
 
 function resetInactivityTimer() {
     autoScroll = false;
-
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
         autoScroll = true;
@@ -87,6 +134,14 @@ function resetInactivityTimer() {
 ["wheel", "keydown", "touchstart", "touchmove", "click"].forEach(event => {
     window.addEventListener(event, resetInactivityTimer, { passive: true });
 });
+
+
+// Wait 5 seconds *after loading completes*
+function startAutoScrollAfterDelay() {
+    setTimeout(() => {
+        autoScroll = true;
+    }, 100);
+}
 
 // AUTO-SCROLL LOOP
 function autoScrollTick() {

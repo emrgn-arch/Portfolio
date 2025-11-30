@@ -5,7 +5,7 @@ html, body {
 }
 
 .scroll-space {
-    height: 1500vh; /*This is max length of Screen*/
+    height: 400vh; /*This is max length of Screen*/
 }
 
 #animCanvas {
@@ -18,6 +18,39 @@ html, body {
     z-index: -1;
 
 }
+
+/* ------------------------------
+   LOADING OVERLAY
+------------------------------ */
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* more transparent */
+    backdrop-filter: blur(2px);      /* optional subtle glass effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Loader text */
+.loader-text {
+    color: white;
+    font-family: "AvantGardeBold", sans-serif;
+    font-size: 1.7em;
+    letter-spacing: 1px;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
 
 /* -------------------------------------
    CUSTOM FONT LOADING
@@ -45,6 +78,7 @@ html, body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
+
 }
 
 .rotate-phone {
@@ -88,6 +122,8 @@ html, body {
     letter-spacing: 0.5px;
     text-align: center;
 }
+
+
 
 
 @keyframes rotatePhone {
