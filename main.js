@@ -55,7 +55,8 @@ function preloadImages() {
         img.onload = () => {
             imagesLoaded++;
 
-            const p = Math.round((imagesLoaded / MIN_FRAMES_TO_START) * 100);
+            let p = Math.round((imagesLoaded / MIN_FRAMES_TO_START) * 100);
+            p = Math.min(p, 100);
             loaderProgress.textContent = p + "%";
 
             // Draw first frame immediately

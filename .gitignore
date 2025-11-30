@@ -1,4 +1,4 @@
-.gitignore
+Fonts/
 Archive/
 assets/
 blendcache_Spiderrig_adjustements/
@@ -22,3 +22,4 @@ Spiderrig_wind.blend
 Spiderrig_wind.blend1
 video_2025-11-22_19-02-12.mp4
 video_web.mp4
+.gitignore
