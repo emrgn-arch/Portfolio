@@ -10,15 +10,10 @@ if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
     window.location.href = window.location.pathname + "?reload=" + Date.now();
 }
 
-
-
-
-
 if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
 }
 
-// Safari/Chrome mobile sometimes override scrollTo, so delay it
 window.scrollTo(0, 0);
 
 window.addEventListener("load", () => {
@@ -41,6 +36,7 @@ canvas.height = 1080;
 
 const images = [];
 let imagesLoaded = 0;
+
 const loaderOverlay = document.getElementById("loading-overlay");
 const loaderProgress = document.getElementById("loader-progress");
 
@@ -48,19 +44,18 @@ function getFrameFileName(index) {
     return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
 }
 
-
+const MIN_FRAMES_TO_START = 300; // adjust as needed
+let firstFramesReady = false;
 
 function preloadImages() {
     for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
-        //img.src = getFrameFileName(i);
-        img.src = getFrameFileName(i) + "?v=" + Date.now();
+        img.src = getFrameFileName(i);
         images[i] = img;
 
         img.onload = () => {
             imagesLoaded++;
 
-            // Update % text (smooth)
             const p = Math.round((imagesLoaded / frameCount) * 100);
             loaderProgress.textContent = p + "%";
 
@@ -69,19 +64,25 @@ function preloadImages() {
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             }
 
-            // When ALL frames loaded
-            if (imagesLoaded === frameCount) {
-                // Fade out text slightly before overlay disappears
+            // As soon as FIRST N frames load → start animation
+            if (!firstFramesReady && imagesLoaded >= MIN_FRAMES_TO_START) {
+                firstFramesReady = true;
                 document.querySelector(".loader-text").style.opacity = "0";
 
                 setTimeout(() => {
                     loaderOverlay.classList.add("hidden");
-                    startAutoScrollAfterDelay(); // auto scroll starts after delay
-                }, 700); // small delay adds elegance
+                    startAutoScrollAfterDelay(); // auto start after 5 sec
+                }, 300);
+            }
+
+            // When really 100% loaded — optional callback
+            if (imagesLoaded === frameCount) {
+                console.log("Full sequence loaded.");
             }
         };
     }
 }
+
 
 preloadImages();
 

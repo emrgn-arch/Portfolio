@@ -57,7 +57,7 @@ html, body {
 --------------------------------------- */
 @font-face {
     font-family: "AvantGardeBold";
-    src: url("fonts/itc-avant-garde-gothic-bold.otf") format("opentype");
+    src: url("./fonts/itc-avant-garde-gothic-bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
