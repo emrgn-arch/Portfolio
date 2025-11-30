@@ -2,7 +2,7 @@
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
-const frameCount = 200;
+const frameCount = 631;
 
 canvas.width = 1920;
 canvas.height = 1080;
@@ -12,7 +12,7 @@ let imagesLoaded = 0;
 
 function getFrameFileName(index) {
     return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
-}
+} 
 
 function preloadImages() {
     for (let i = 1; i <= frameCount; i++) {
@@ -65,7 +65,7 @@ let autoScroll = true;
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
-const AUTO_SCROLL_SPEED = maxScroll * 0.0016; 
+const AUTO_SCROLL_SPEED = maxScroll * 0.0005; 
 
 const INACTIVITY_DELAY = 4000;
 
