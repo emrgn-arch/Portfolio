@@ -44,7 +44,7 @@ function getFrameFileName(index) {
     return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
 }
 
-const MIN_FRAMES_TO_START = 300; // adjust as needed
+const MIN_FRAMES_TO_START = 365; // adjust as needed
 let firstFramesReady = false;
 
 function preloadImages() {
@@ -56,7 +56,7 @@ function preloadImages() {
         img.onload = () => {
             imagesLoaded++;
 
-            const p = Math.round((imagesLoaded / frameCount) * 100);
+            const p = Math.round((imagesLoaded / MIN_FRAMES_TO_START) * 100);
             loaderProgress.textContent = p + "%";
 
             // Draw first frame immediately
