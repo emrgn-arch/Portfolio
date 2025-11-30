@@ -25,10 +25,16 @@ window.addEventListener("load", () => {
 });
 
 
+const loaderOverlay = document.getElementById("loading-overlay");
+const loaderProgress = document.getElementById("loader-progress");
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
-const frameCount = 631;
+const frameCount = 632;
+const MIN_FRAMES_TO_START = frameCount; // adjust as needed
+let firstFramesReady = false;
+
+let autoScroll = false;
 
 canvas.width = 1920;
 canvas.height = 1080;
@@ -36,15 +42,10 @@ canvas.height = 1080;
 const images = [];
 let imagesLoaded = 0;
 
-const loaderOverlay = document.getElementById("loading-overlay");
-const loaderProgress = document.getElementById("loader-progress");
 
 function getFrameFileName(index) {
     return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
 }
-
-const MIN_FRAMES_TO_START = 365; // adjust as needed
-let firstFramesReady = false;
 
 function preloadImages() {
     for (let i = 1; i <= frameCount; i++) {
@@ -103,7 +104,8 @@ let currentFrameIndex = 1;
 function render() {
     const targetFrame = getScrollFrame();
 
-    if (targetFrame !== currentFrameIndex && images[targetFrame]) {
+    // Only draw frames that are fully loaded
+    if (images[targetFrame] && images[targetFrame].complete) {
         ctx.drawImage(images[targetFrame], 0, 0, canvas.width, canvas.height);
         currentFrameIndex = targetFrame;
     }
@@ -113,7 +115,7 @@ function render() {
 
 requestAnimationFrame(render);
 
-let autoScroll = false;
+
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
