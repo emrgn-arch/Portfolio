@@ -24,10 +24,11 @@ html, body {
 
 /* -------------------------------------
    CUSTOM FONT LOADING
+   src: 
 --------------------------------------- */
 @font-face {
     font-family: "AvantGardeBold";
-    src: url("./Fonts/itc-avant-garde-gothic-bold.otf") format("opentype");
+    src: url("https://github.com/emrgn-arch/Portfolio/tree/main/Fonts/itc-avant-garde-gothic-bold.otf") format("opentype");    
     font-weight: bold;
     font-style: normal;
 }
