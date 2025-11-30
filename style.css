@@ -27,7 +27,7 @@ html, body {
 --------------------------------------- */
 @font-face {
     font-family: "AvantGardeBold";
-    src: url("./fonts/itc-avant-garde-gothic-bold.otf") format("opentype");
+    src: url("./Fonts/itc-avant-garde-gothic-bold.otf") format("opentype");
     font-weight: bold;
     font-style: normal;
 }
@@ -63,6 +63,55 @@ html, body {
     opacity: 1;
     transition: opacity 0.4s ease;
 }
+
+
+/* -------------------------------------
+   COUNTDOWN OVERLAY
+--------------------------------------- */
+#countdown-timer {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: "AvantGardeBold", sans-serif;
+    font-size: 2em;
+    color: rgba(0, 0, 0, 0.75);
+    letter-spacing: 1px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 7;
+}
+
+#play-button {
+    position: fixed;
+    top: 28px;
+    left: 24px;
+    font-family: "AvantGardeBold", sans-serif;
+    font-size: 1.6em;
+    color: rgba(0, 0, 0, 0.75);
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    z-index: 7;
+    user-select: none;
+}
+#play-button .triangle {
+    width: 0;
+    height: 0;
+
+    /* PURE CSS TRIANGLE */
+    border-left: 17px solid rgba(0, 0, 0, 0.75);   /* triangle color */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+    /* center vertically inside the container */
+    margin-top: 2px;
+}
+#play-button:hover {
+    opacity: 1;
+}
+
+
 
 /* -------------------------------------
    ROTATE DEVICE OVERLAY

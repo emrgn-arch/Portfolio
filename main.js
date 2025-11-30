@@ -25,7 +25,6 @@ window.addEventListener("load", () => {
 });
 
 
-
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -113,23 +112,48 @@ function render() {
 
 requestAnimationFrame(render);
 
-
+let autoScroll = false;
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
 const AUTO_SCROLL_SPEED = maxScroll * 0.00054; 
-
 const INACTIVITY_DELAY = 4000;
 
-let autoScroll = false;
+
+const countdownElement = document.getElementById("countdown-timer");
+let countdownValue = INACTIVITY_DELAY / 1000; // e.g. 4 seconds
+let countdownInterval;
+const playButton = document.getElementById("play-button");
+let isCountingDown = false;
 
 function resetInactivityTimer() {
     autoScroll = false;
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-        autoScroll = true;
-    }, INACTIVITY_DELAY);
+
+    clearInterval(countdownInterval);
+
+    countdownValue = INACTIVITY_DELAY / 1000;
+    countdownElement.textContent = countdownValue;
+
+    countdownElement.style.opacity = "1";
+    playButton.style.opacity = "0";
+
+    countdownInterval = setInterval(() => {
+        countdownValue--;
+        countdownElement.textContent = countdownValue;
+
+        if (countdownValue <= 0) {
+            clearInterval(countdownInterval);
+
+            // Hide countdown
+            countdownElement.style.opacity = "0";
+            playButton.style.opacity = "1";
+
+            // Reactivate auto-scroll
+            autoScroll = true;
+        }
+    }, 1000);
 }
+
 
 // Detect some user interaction
 ["wheel", "keydown", "touchstart", "touchmove", "click"].forEach(event => {
