@@ -61,13 +61,18 @@ requestAnimationFrame(render);
 
 // AUTO-SCROLL + USER INTERRUPTION 
 
-let autoScroll = true;
+let autoScroll = false;
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
 const AUTO_SCROLL_SPEED = maxScroll * 0.0005; 
 
 const INACTIVITY_DELAY = 4000;
+
+// Enable auto-scroll after delay
+setTimeout(() => {
+    autoScroll = true;
+}, INACTIVITY_DELAY);
 
 function resetInactivityTimer() {
     autoScroll = false;
