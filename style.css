@@ -20,19 +20,6 @@ html, body {
 }
 
 
-
-
-/* -------------------------------------
-   CUSTOM FONT LOADING
-   src: 
---------------------------------------- */
-@font-face {
-    font-family: "AvantGardeBold";
-    src: url("https://github.com/emrgn-arch/Portfolio/tree/main/Fonts/itc-avant-garde-gothic-bold.otf") format("opentype");    
-    font-weight: bold;
-    font-style: normal;
-}
-
 /* ------------------------------
    LOADING OVERLAY
 ------------------------------ */
@@ -58,7 +45,8 @@ html, body {
 /* Loader text */
 .loader-text {
     color: white;
-    font-family: "AvantGardeBold", sans-serif;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 700;
     font-size: 1.7em;
     letter-spacing: 1px;
     opacity: 1;
@@ -73,7 +61,8 @@ html, body {
     position: fixed;
     top: 20px;
     left: 20px;
-    font-family: "AvantGardeBold", sans-serif;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 700;
     font-size: 2em;
     color: rgba(0, 0, 0, 0.75);
     letter-spacing: 1px;
@@ -87,7 +76,8 @@ html, body {
     position: fixed;
     top: 28px;
     left: 24px;
-    font-family: "AvantGardeBold", sans-serif;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 700;
     font-size: 1.6em;
     color: rgba(0, 0, 0, 0.75);
     opacity: 1;
@@ -170,7 +160,8 @@ html, body {
 .rotate-text {
     font-size: 1.1em;
     color: white;
-    font-family: "AvantGardeBold", sans-serif;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 700;
     letter-spacing: 0.5px;
     text-align: center;
 }
