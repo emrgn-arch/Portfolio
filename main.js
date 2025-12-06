@@ -30,7 +30,7 @@ const loaderProgress = document.getElementById("loader-progress");
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
-const frameCount = 910;
+const frameCount = 820;
 const MIN_FRAMES_TO_START = frameCount; // adjust as needed
 let firstFramesReady = false;
 
