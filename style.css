@@ -5,7 +5,7 @@ html, body {
 }
 
 .scroll-space {
-    height: 400vh; /*This is max length of Screen*/
+    height: 1200vh; /*This is max length of Screen*/
 }
 
 #animCanvas {

@@ -30,7 +30,7 @@ const loaderProgress = document.getElementById("loader-progress");
 const canvas = document.getElementById("animCanvas");
 const ctx = canvas.getContext("2d");
 
-const frameCount = 632;
+const frameCount = 910;
 const MIN_FRAMES_TO_START = frameCount; // adjust as needed
 let firstFramesReady = false;
 
@@ -44,7 +44,7 @@ let imagesLoaded = 0;
 
 
 function getFrameFileName(index) {
-    return `RenderFrames/${String(index).padStart(4, "0")}.jpg`;
+    return `RenderFrames/${String(index).padStart(4, "0")}.webp`;
 }
 
 function preloadImages() {
@@ -119,7 +119,7 @@ requestAnimationFrame(render);
 let inactivityTimer;
 //console.log(window.innerHeight);
 const maxScroll = document.body.scrollHeight - window.innerHeight;
-const AUTO_SCROLL_SPEED = maxScroll * 0.00054; 
+const AUTO_SCROLL_SPEED = maxScroll * 0.00064; 
 const INACTIVITY_DELAY = 4000;
 
 
